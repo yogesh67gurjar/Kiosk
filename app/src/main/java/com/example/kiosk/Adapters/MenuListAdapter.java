@@ -50,13 +50,23 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MyView
 
         ////////////////
         holder.add_to_card.setOnClickListener(v -> {
-            int itemId = data.get(position).getItemId();
-            int shopId = data.get(position).getShopId();
-            Intent i = new Intent(context, OrderSummaryActivity.class);
-            i.putExtra("itemId", itemId);
-            i.putExtra("shopId", shopId);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(i);
+
+            // add to cart waali api lgegi yha and intent nhi khulega
+            if(holder.add_to_card.getText().toString().equalsIgnoreCase("Add To Cart"))
+            {
+                holder.add_to_card.setText("added");
+            }
+            else {
+                holder.add_to_card.setText("Add To Cart");
+            }
+
+//            int itemId = data.get(position).getItemId();
+//            int shopId = data.get(position).getShopId();
+//            Intent i = new Intent(context, OrderSummaryActivity.class);
+//            i.putExtra("itemId", itemId);
+//            i.putExtra("shopId", shopId);
+//            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            context.startActivity(i);
         });
     }
 
