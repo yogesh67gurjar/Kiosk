@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void showCartCount() {
+    public void showCartCount() {
 
         if (databaseHelper.cartDao().getAllCart().size() > 0) {
             binding.menu.setBadgeValue(databaseHelper.cartDao().getAllCart().size());

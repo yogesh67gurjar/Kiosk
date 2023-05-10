@@ -71,7 +71,7 @@ public class MenuFragment extends Fragment {
                 if (response.isSuccessful()) {
 
                     if (response.body().getData() != null) {
-                        menuAdapter = new MenuListAdapter(getContext(), response.body().getData().getShopMenu());
+                        menuAdapter = new MenuListAdapter(getContext(), response.body().getData().getShopMenu(),databaseHelper);
                         recyclerView.setAdapter(menuAdapter);
                         recyclerView.setHasFixedSize(true);
                     } else {
