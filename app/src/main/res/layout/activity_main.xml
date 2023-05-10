@@ -31,17 +31,40 @@
         app:layout_constraintStart_toEndOf="@+id/imageButton"
         app:layout_constraintTop_toTopOf="@+id/imageButton" />
 
-    <ImageButton
+
+    <ru.nikartm.support.ImageBadgeView
         android:id="@+id/menu"
         android:layout_width="114dp"
         android:layout_height="114dp"
+        android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="12dp"
         android:background="#00FFFFFF"
-        android:scaleType="fitXY"
+        android:padding="5dp"
         android:src="@drawable/cart"
+        app:ibv_badgeColor="#FF0000"
+        app:ibv_badgeLimitValue="false"
+        app:ibv_badgePosition="top_right"
+        app:ibv_badgeTextColor="#ffffff"
+        app:ibv_badgeTextSize="8sp"
+        app:ibv_badgeTextStyle="bold"
+        app:ibv_badgeValue="5"
+        app:ibv_fixedBadgeRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+<!--    <ImageButton-->
+<!--        android:id="@+id/menu"-->
+<!--        android:layout_width="114dp"-->
+<!--        android:layout_height="114dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginEnd="12dp"-->
+<!--        android:background="#00FFFFFF"-->
+<!--        android:scaleType="fitXY"-->
+<!--        android:src="@drawable/cart"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 
     <ScrollView

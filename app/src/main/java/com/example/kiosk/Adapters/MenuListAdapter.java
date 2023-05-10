@@ -50,7 +50,6 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MyView
 
         ////////////////
         holder.add_to_card.setOnClickListener(v -> {
-
             // add to cart waali api lgegi yha and intent nhi khulega
             if(holder.add_to_card.getText().toString().equalsIgnoreCase("Add To Cart"))
             {

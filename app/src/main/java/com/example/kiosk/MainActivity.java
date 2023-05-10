@@ -19,8 +19,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.kiosk.Adapters.CategoryAdapter;
 import com.example.kiosk.Fragments.DefaultMenuFragment;
 import com.example.kiosk.Response.CategoryResponse;
+import com.example.kiosk.Room.DatabaseHelper;
 import com.example.kiosk.Service.Api_interface;
 import com.example.kiosk.Service.Retrofit;
+import com.example.kiosk.databinding.ActivityMainBinding;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,6 +30,8 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    ActivityMainBinding binding;
+    DatabaseHelper databaseHelper;
     ImageView menu;
     RecyclerView category_rv;
     CategoryAdapter categoryAdapter;
@@ -40,11 +44,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        databaseHelper = DatabaseHelper.getInstance(MainActivity.this);
         SharedPreferences sharedPreferences = this.getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
         Integer ShopID = sharedPreferences.getInt("ShopID", 0);
-
+        showCartCount();
         category_rv = findViewById(R.id.category_rv);
         container = findViewById(R.id.container);
         fragmentManager = getSupportFragmentManager();
@@ -63,8 +68,19 @@ public class MainActivity extends AppCompatActivity {
 
         category_item(ShopID, page, limit, filter, hasMenu);
 
-        DefaultMenuFragment defaultMenuFragment = new DefaultMenuFragment();
+        DefaultMenuFragment defaultMenuFragment = new DefaultMenuFragment(databaseHelper, MainActivity.this);
         loadFrag(defaultMenuFragment, "", fragmentManager);
+
+    }
+
+    private void showCartCount() {
+
+        if (databaseHelper.cartDao().getAllCart().size() > 0) {
+            binding.menu.setBadgeValue(databaseHelper.cartDao().getAllCart().size());
+            binding.menu.visibleBadge(true);
+        } else {
+            binding.menu.visibleBadge(false);
+        }
 
     }
 
@@ -78,10 +94,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     private void category_item(Integer shopID, Integer page, Integer limit, Integer filter, boolean hasMenu) {
         retrofitInterface = Retrofit.getRetrofit().create(Api_interface.class);
-
 
 
         Call<CategoryResponse> call = retrofitInterface.categoryList(shopID, page, limit, filter, hasMenu);
