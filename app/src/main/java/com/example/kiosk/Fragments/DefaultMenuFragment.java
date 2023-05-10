@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.kiosk.Adapters.MenuListAdapter;
 import com.example.kiosk.Data.Menu.MenuResponse;
 import com.example.kiosk.R;
+import com.example.kiosk.Room.DatabaseHelper;
 import com.example.kiosk.Service.Api_interface;
 import com.example.kiosk.Service.Retrofit;
 
@@ -25,11 +26,18 @@ import retrofit2.Response;
 
 public class DefaultMenuFragment extends Fragment {
 
+    DatabaseHelper databaseHelper;
+    Context context;
     RecyclerView menu_list_rv;
     MenuListAdapter menuListAdapter;
     RecyclerView.LayoutManager LayoutManager;
     Integer shopID, categoryId, page, limit;
     Api_interface retrofitInterface;
+
+    public DefaultMenuFragment(DatabaseHelper databaseHelper, Context context) {
+        this.databaseHelper = databaseHelper;
+        this.context = context;
+    }
 
     @SuppressLint("MissingInflatedId")
     @Override

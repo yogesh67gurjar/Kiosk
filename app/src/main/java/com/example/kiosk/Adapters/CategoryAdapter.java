@@ -17,12 +17,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.kiosk.Data.CategoryData;
 import com.example.kiosk.Fragments.MenuFragment;
 import com.example.kiosk.R;
+import com.example.kiosk.Room.DatabaseHelper;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
 
+    DatabaseHelper databaseHelper;
     Context context;
     List<CategoryData> data;
 
@@ -46,7 +48,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         holder.product_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MenuFragment menuFragment = new MenuFragment();
+                MenuFragment menuFragment = new MenuFragment(databaseHelper,context);
                 Bundle bundle = new Bundle();
                 bundle.putInt("Id", singleUnit.getId());
                 menuFragment.setArguments(bundle);

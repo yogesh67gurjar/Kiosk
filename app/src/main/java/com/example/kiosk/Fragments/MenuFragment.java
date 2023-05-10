@@ -7,14 +7,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.kiosk.Adapters.MenuListAdapter;
 import com.example.kiosk.Data.Menu.MenuResponse;
 import com.example.kiosk.R;
+import com.example.kiosk.Room.DatabaseHelper;
 import com.example.kiosk.Service.Api_interface;
 import com.example.kiosk.Service.Retrofit;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,11 +26,21 @@ import retrofit2.Response;
 
 public class MenuFragment extends Fragment {
 
+    DatabaseHelper databaseHelper;
+    Context context;
+
     MenuListAdapter menuAdapter;
     RecyclerView recyclerView;
     Api_interface retrofitInterface;
     Integer shopID, categoryId, page, limit;
-    RecyclerView.LayoutManager LayoutManager;    @Override
+    RecyclerView.LayoutManager LayoutManager;
+
+    public MenuFragment(DatabaseHelper databaseHelper, Context context) {
+        this.databaseHelper = databaseHelper;
+        this.context = context;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_menu, container, false);
