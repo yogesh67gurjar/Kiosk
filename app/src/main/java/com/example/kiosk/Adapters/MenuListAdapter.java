@@ -8,26 +8,33 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kiosk.Data.Menu.ShopMenuItem;
+import com.example.kiosk.MainActivity;
 import com.example.kiosk.OrderSummaryActivity;
 import com.example.kiosk.R;
+import com.example.kiosk.Room.CartModel;
+import com.example.kiosk.Room.DatabaseHelper;
 import com.squareup.picasso.Picasso;
 
+import java.nio.FloatBuffer;
 import java.util.List;
 
 public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MyViewHolder> {
 
+    DatabaseHelper databaseHelper;
     Context context;
     List<ShopMenuItem> data;
 
 
-    public MenuListAdapter(Context context, List<ShopMenuItem> data) {
+    public MenuListAdapter(Context context, List<ShopMenuItem> data, DatabaseHelper databaseHelper) {
         this.context = context;
         this.data = data;
+        this.databaseHelper = databaseHelper;
     }
 
     @NonNull
@@ -51,12 +58,20 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MyView
         ////////////////
         holder.add_to_card.setOnClickListener(v -> {
             // add to cart waali api lgegi yha and intent nhi khulega
-            if(holder.add_to_card.getText().toString().equalsIgnoreCase("Add To Cart"))
-            {
-                holder.add_to_card.setText("added");
-            }
-            else {
-                holder.add_to_card.setText("Add To Cart");
+//            if (holder.add_to_card.getText().toString().equalsIgnoreCase("Add To Cart")) {
+//
+//                holder.add_to_card.setText("added");
+//            } else {
+//                holder.add_to_card.setText("Add To Cart");
+//            }
+            if (databaseHelper.cartDao().doesUserExist(data.get(position).getItemId())) {
+                Toast.makeText(context, "Item already exists in the cart", Toast.LENGTH_SHORT).show();
+            } else {
+                databaseHelper.cartDao().addCart(new CartModel(data.get(position).getItemId(),
+                        data.get(position).getName(), data.get(position).getCategory().getName(),
+                        data.get(position).getBasePrice().getDineIn().floatValue(), data.get(position).getImage()));
+                    ((MainActivity) context).showCartCount();
+                Toast.makeText(context, "Item successfully added to cart", Toast.LENGTH_SHORT).show();
             }
 
 //            int itemId = data.get(position).getItemId();

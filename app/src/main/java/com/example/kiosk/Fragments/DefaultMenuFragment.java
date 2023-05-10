@@ -71,7 +71,7 @@ public class DefaultMenuFragment extends Fragment {
                 if (response.isSuccessful()) {
 
                     if (response.body().getData() != null) {
-                        menuListAdapter = new MenuListAdapter(getContext(), response.body().getData().getShopMenu());
+                        menuListAdapter = new MenuListAdapter(getContext(), response.body().getData().getShopMenu(),databaseHelper);
                         menu_list_rv.setAdapter(menuListAdapter);
                         menu_list_rv.setHasFixedSize(true);
                     } else {

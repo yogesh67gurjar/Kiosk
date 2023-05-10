@@ -11,6 +11,9 @@ public class CartModel {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
+    @ColumnInfo(name = "itemId")
+    private int itemId;
+
     @ColumnInfo(name = "cartName")
     private String cartName;
 
@@ -23,16 +26,17 @@ public class CartModel {
     @ColumnInfo(name = "imagePath")
     private String imagePath;
 
-
-    public CartModel(int id, String cartName, String cartDisc, float cartPrice, String imagePath) {
+    public CartModel(int id, int itemId, String cartName, String cartDisc, float cartPrice, String imagePath) {
         this.id = id;
+        this.itemId = itemId;
         this.cartName = cartName;
         this.cartDisc = cartDisc;
         this.cartPrice = cartPrice;
         this.imagePath = imagePath;
     }
     @Ignore
-    public CartModel(String cartName, String cartDisc, float cartPrice, String imagePath) {
+    public CartModel(int itemId, String cartName, String cartDisc, float cartPrice, String imagePath) {
+        this.itemId = itemId;
         this.cartName = cartName;
         this.cartDisc = cartDisc;
         this.cartPrice = cartPrice;
@@ -45,6 +49,14 @@ public class CartModel {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
     }
 
     public String getCartName() {
