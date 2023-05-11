@@ -24,6 +24,9 @@ public interface CartDao {
     @Query("SELECT * FROM CartModel")
     List<CartModel> getAllCart();
 
+    @Query("DELETE from CartModel")
+    void deleteAll();
+
     @Query("SELECT EXISTS(SELECT 1 FROM CartModel WHERE itemId = :userId)")
     boolean doesUserExist(int userId);
 
