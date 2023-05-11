@@ -43,8 +43,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="500dp"
-            android:layout_height="500dp"
+            android:layout_width="450dp"
+            android:layout_height="450dp"
             android:src="@drawable/qr_code"
             android:layout_marginTop="200dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +56,7 @@
     <LinearLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="500dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     String password, shopID;
     Api_interface retrofitInterface;
     ProgressDialog progressDialog;
+    private SessionManager sessionManager;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -38,6 +39,15 @@ public class LoginActivity extends AppCompatActivity {
         shopID_et = findViewById(R.id.shopID_et);
         password_et = findViewById(R.id.password_et);
         login = findViewById(R.id.login);
+
+        sessionManager = new SessionManager(this);
+
+        if (sessionManager.isLoggedIn()) {
+            // User is already logged in, go to main activity
+            Intent intent = new Intent(LoginActivity.this, StartingActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Kiosk App");
@@ -75,6 +85,8 @@ public class LoginActivity extends AppCompatActivity {
                         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putInt("ShopID", ShopID);
                         editor.putString("Token", Token);
+                        sessionManager.saveUserInfo(shopID, password);
+                        sessionManager.setLoggedIn(true);
                         editor.apply();
                         progressDialog.dismiss();
                         Intent i = new Intent(LoginActivity.this, StartingActivity.class);

@@ -49,7 +49,7 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MyView
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Picasso.get().load(data.get(position).getImage()).placeholder(R.drawable.img_card).into(holder.image);
+        Picasso.get().load("https://segwitz-api.myeongdongtopokki.com/"+data.get(position).getImage()).placeholder(R.drawable.img_card).into(holder.image);
         holder.dish_name.setText(data.get(position).getName());
         holder.amount.setText("RM " + data.get(position).getBasePrice().getDineIn().toString());
 //            Log.d("hello usfjksdfjksdf", singleUnit.getName() + " " + singleUnit.getImage() + " " + singleUnit.getBasePrice().getDineIn());
@@ -68,7 +68,7 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MyView
 //        ////////////////
         holder.add_to_card.setOnClickListener(v -> {
 
-            if (databaseHelper.cartDao().doesUserExist((Integer) data.get(position).getItemId())) {
+            if (databaseHelper.cartDao().doesUserExist(data.get(position).getItemId())) {
                 Log.d("idididididididid111111", String.valueOf(data.get(position).getItemId()));
                 Toast.makeText(context, "Item already exists in the cart", Toast.LENGTH_SHORT).show();
             } else {

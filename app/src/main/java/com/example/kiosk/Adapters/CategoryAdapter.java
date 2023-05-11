@@ -62,7 +62,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         });
 
         holder.product_name.setText(data.get(position).getName());
-        Picasso.get().load(data.get(position).getImage()).placeholder(R.drawable.img_non).into(holder.product_img);
+        Picasso.get().load("https://segwitz-api.myeongdongtopokki.com/"+data.get(position).getImage()).placeholder(R.drawable.img_non).into(holder.product_img);
     }
 
     @Override
