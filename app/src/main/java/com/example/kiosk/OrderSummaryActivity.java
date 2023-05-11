@@ -8,19 +8,25 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import com.example.kiosk.Room.DatabaseHelper;
+
 public class OrderSummaryActivity extends AppCompatActivity {
 
     AppCompatButton pay;
     ImageButton back;
     TextView apply;
 
+    DatabaseHelper databaseHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_summary);
+        databaseHelper = DatabaseHelper.getInstance(OrderSummaryActivity.this);
 
         pay = findViewById(R.id.pay);
         pay.setOnClickListener(v -> {
+            databaseHelper.cartDao().deleteAll();
             Intent i = new Intent(OrderSummaryActivity.this, PaymentActivity.class);
             startActivity(i);
             finish();

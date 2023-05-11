@@ -31,5 +31,4 @@ public interface CartDao {
     @Query("SELECT EXISTS(SELECT 1 FROM CartModel WHERE itemId = :userId)")
     boolean doesUserExist(int userId);
 
-
 }
