@@ -48,7 +48,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         holder.product_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MenuFragment menuFragment = new MenuFragment(databaseHelper,context);
+                MenuFragment menuFragment = new MenuFragment(context);
                 Bundle bundle = new Bundle();
                 bundle.putInt("Id", singleUnit.getId());
                 menuFragment.setArguments(bundle);

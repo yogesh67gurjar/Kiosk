@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kiosk.Adapters.MenuListAdapter;
+import com.example.kiosk.Data.Menu.Data;
 import com.example.kiosk.Data.Menu.MenuResponse;
 import com.example.kiosk.R;
 import com.example.kiosk.Room.DatabaseHelper;
@@ -35,9 +36,10 @@ public class MenuFragment extends Fragment {
     Integer shopID, categoryId, page, limit;
     RecyclerView.LayoutManager LayoutManager;
 
-    public MenuFragment(DatabaseHelper databaseHelper, Context context) {
-        this.databaseHelper = databaseHelper;
+    public MenuFragment(Context context) {
+
         this.context = context;
+        this.databaseHelper = DatabaseHelper.getInstance(context);
     }
 
     @Override
@@ -71,7 +73,7 @@ public class MenuFragment extends Fragment {
                 if (response.isSuccessful()) {
 
                     if (response.body().getData() != null) {
-                        menuAdapter = new MenuListAdapter(getContext(), response.body().getData().getShopMenu(),databaseHelper);
+                        menuAdapter = new MenuListAdapter(getContext(), response.body().getData().getShopMenu());
                         recyclerView.setAdapter(menuAdapter);
                         recyclerView.setHasFixedSize(true);
                     } else {

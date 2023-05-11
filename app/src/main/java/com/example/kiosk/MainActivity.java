@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
         category_item(ShopID, page, limit, filter, hasMenu);
 
-        DefaultMenuFragment defaultMenuFragment = new DefaultMenuFragment(databaseHelper, MainActivity.this);
+        DefaultMenuFragment defaultMenuFragment = new DefaultMenuFragment(MainActivity.this);
         loadFrag(defaultMenuFragment, "", fragmentManager);
 
     }
