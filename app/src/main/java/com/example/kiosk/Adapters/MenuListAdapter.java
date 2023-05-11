@@ -3,6 +3,7 @@ package com.example.kiosk.Adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,23 +56,28 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MyView
         holder.dish_name.setText(data.get(position).getName());
         holder.amount.setText("RM" + data.get(position).getBasePrice().getDineIn().toString());
 
-        ////////////////
+//        String cartName = holder.dish_name.getText().toString();
+////        String cartDisc;
+////        if (data.get(position).getMasterMenu().getName() != null) {
+////            cartDisc = data.get(position).getMasterMenu().getName();
+////        } else {
+////            cartDisc = " ";
+////        }
+//        float price = data.get(position).getBasePrice().getDineIn().floatValue();
+//        String imagePath = data.get(position).getImage();
+//        ////////////////
         holder.add_to_card.setOnClickListener(v -> {
-            // add to cart waali api lgegi yha and intent nhi khulega
-//            if (holder.add_to_card.getText().toString().equalsIgnoreCase("Add To Cart")) {
-//
-//                holder.add_to_card.setText("added");
-//            } else {
-//                holder.add_to_card.setText("Add To Cart");
-//            }
-            if (databaseHelper.cartDao().doesUserExist(data.get(position).getItemId())) {
+
+            int id = (int) data.get(position).getItemId();
+
+            if (databaseHelper.cartDao().doesUserExist((Integer) data.get(position).getItemId())) {
+                Log.d("idididididididid111111", String.valueOf(data.get(position).getItemId()));
                 Toast.makeText(context, "Item already exists in the cart", Toast.LENGTH_SHORT).show();
             } else {
-                databaseHelper.cartDao().addCart(new CartModel(data.get(position).getItemId(),
-                        data.get(position).getName(), data.get(position).getCategory().getName(),
-                        data.get(position).getBasePrice().getDineIn().floatValue(), data.get(position).getImage()));
-                    ((MainActivity) context).showCartCount();
+                databaseHelper.cartDao().addCart(new CartModel((Integer) data.get(position).getItemId(), data.get(position).getName(), data.get(position).getMasterMenu().getDesc(), data.get(position).getBasePrice().getDineIn().floatValue(), data.get(position).getImage()));
+                ((MainActivity) context).showCartCount();
                 Toast.makeText(context, "Item successfully added to cart", Toast.LENGTH_SHORT).show();
+                Log.d("idididididididid222222", String.valueOf(data.get(position).getItemId()));
             }
 
 //            int itemId = data.get(position).getItemId();

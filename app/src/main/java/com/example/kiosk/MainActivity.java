@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         databaseHelper = DatabaseHelper.getInstance(MainActivity.this);
+//        databaseHelper.cartDao().deleteAll();
         SharedPreferences sharedPreferences = this.getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
         Integer ShopID = sharedPreferences.getInt("ShopID", 0);
         showCartCount();
@@ -79,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
             binding.menu.setBadgeValue(databaseHelper.cartDao().getAllCart().size());
             binding.menu.visibleBadge(true);
         } else {
+            binding.menu.setBadgeValue(0);
             binding.menu.visibleBadge(false);
         }
 
