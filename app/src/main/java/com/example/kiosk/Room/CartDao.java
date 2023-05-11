@@ -12,6 +12,7 @@ import java.util.List;
 @Dao
 public interface CartDao {
 
+    // made by madhur sir and team
     @Insert
     void addCart(CartModel cartModel);
 
