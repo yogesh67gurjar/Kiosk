@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kiosk.Adapters.MenuListAdapter;
+import com.example.kiosk.Data.Menu.Data;
 import com.example.kiosk.Data.Menu.MenuResponse;
 import com.example.kiosk.R;
 import com.example.kiosk.Room.DatabaseHelper;
@@ -26,7 +27,7 @@ import retrofit2.Response;
 
 public class DefaultMenuFragment extends Fragment {
 
-    DatabaseHelper databaseHelper;
+
     Context context;
     RecyclerView menu_list_rv;
     MenuListAdapter menuListAdapter;
@@ -34,8 +35,7 @@ public class DefaultMenuFragment extends Fragment {
     Integer shopID, categoryId, page, limit;
     Api_interface retrofitInterface;
 
-    public DefaultMenuFragment(DatabaseHelper databaseHelper, Context context) {
-        this.databaseHelper = databaseHelper;
+    public DefaultMenuFragment(Context context) {
         this.context = context;
     }
 
@@ -71,7 +71,7 @@ public class DefaultMenuFragment extends Fragment {
                 if (response.isSuccessful()) {
 
                     if (response.body().getData() != null) {
-                        menuListAdapter = new MenuListAdapter(getContext(), response.body().getData().getShopMenu(),databaseHelper);
+                        menuListAdapter = new MenuListAdapter(getContext(), response.body().getData().getShopMenu());
                         menu_list_rv.setAdapter(menuListAdapter);
                         menu_list_rv.setHasFixedSize(true);
                     } else {

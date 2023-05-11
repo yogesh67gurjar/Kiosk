@@ -27,15 +27,15 @@ import java.util.List;
 
 public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MyViewHolder> {
 
-    DatabaseHelper databaseHelper;
+
     Context context;
     List<ShopMenuItem> data;
+    DatabaseHelper databaseHelper;
 
-
-    public MenuListAdapter(Context context, List<ShopMenuItem> data, DatabaseHelper databaseHelper) {
+    public MenuListAdapter(Context context, List<ShopMenuItem> data) {
         this.context = context;
         this.data = data;
-        this.databaseHelper = databaseHelper;
+        databaseHelper = DatabaseHelper.getInstance(context);
     }
 
     @NonNull
@@ -68,8 +68,6 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MyView
 //        ////////////////
         holder.add_to_card.setOnClickListener(v -> {
 
-            int id = (int) data.get(position).getItemId();
-
             if (databaseHelper.cartDao().doesUserExist((Integer) data.get(position).getItemId())) {
                 Log.d("idididididididid111111", String.valueOf(data.get(position).getItemId()));
                 Toast.makeText(context, "Item already exists in the cart", Toast.LENGTH_SHORT).show();
@@ -99,7 +97,7 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MyView
         }
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         ImageView image;
         TextView dish_name, amount, add_to_card;
