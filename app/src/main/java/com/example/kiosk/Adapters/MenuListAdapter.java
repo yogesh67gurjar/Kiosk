@@ -49,7 +49,9 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MyView
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Picasso.get().load("https://segwitz-api.myeongdongtopokki.com/"+data.get(position).getImage()).placeholder(R.drawable.img_card).into(holder.image);
+        String itemImage="https://segwitz-api.myeongdongtopokki.com/"+data.get(position).getImage();
+        Picasso.get().load(itemImage).placeholder(R.drawable.img_card).into(holder.image);
+        Log.d("fsdfsdfnsdfsd2222menulist",itemImage);
         holder.dish_name.setText(data.get(position).getName());
         holder.amount.setText("RM " + data.get(position).getBasePrice().getDineIn().toString());
 //            Log.d("hello usfjksdfjksdf", singleUnit.getName() + " " + singleUnit.getImage() + " " + singleUnit.getBasePrice().getDineIn());

@@ -2,6 +2,7 @@ package com.example.kiosk.Adapters;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         });
 
         holder.product_name.setText(data.get(position).getName());
-        Picasso.get().load("https://segwitz-api.myeongdongtopokki.com/"+data.get(position).getImage()).placeholder(R.drawable.img_non).into(holder.product_img);
+        String itemImage="https://segwitz-api.myeongdongtopokki.com/"+data.get(position).getImage();
+        Log.d("fsdfsdfnsdfsd11111category",itemImage);
+        Picasso.get().load(itemImage).placeholder(R.drawable.img_non).into(holder.product_img);
     }
 
     @Override
